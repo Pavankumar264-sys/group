@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #121212;
+        color: #fff;
+    }
+    header {
+        background: #1DB954;
+        padding: 20px;
+        text-align: center;
+    }
+    header h1 {
+        margin: 0;
+    }
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #181818;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .search-section {
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #1DB954;
+    }
+    input, select, button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 5px;
+    }
+    input, select {
+        background: #282828;
+        color: #fff;
+    }
+    button {
+        background: #1DB954;
+        color: #fff;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    button:hover {
+        background: #1aa34a;
+    }
+</style>
+
+<div class="container">
+    <!-- Search by Player Name -->
+    <div class="search-section">
+        <form action="/search" method="GET">
+            <label for="player_name">Search IPL Player by Name:</label>
+            <input type="text" id="player_name" name="player_name" placeholder="Enter player name">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- Search by Team -->
+    <div class="search-section">
+        <form action="/search" method="GET">
+            <label for="team">Search Players by Team:</label>
+            <select id="team" name="team">
+                <option value="">Select a team</option>
+                <option value="MI">Mumbai Indians</option>
+                <option value="CSK">Chennai Super Kings</option>
+                <option value="RCB">Royal Challengers Bangalore</option>
+                <option value="KKR">Kolkata Knight Riders</option>
+                <option value="SRH">Sunrisers Hyderabad</option>
+                <option value="PBKS">Punjab Kings</option>
+                <option value="DC">Delhi Capitals</option>
+                <option value="RR">Rajasthan Royals</option>
+                <option value="GT">Gujarat Titans</option>
+                <option value="LSG">Lucknow Super Giants</option>
+            </select>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</div>
+{%endblock%}

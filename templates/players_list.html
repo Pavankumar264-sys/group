@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>IPL Players</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Player ID</th>
+            <th>Name</th>
+            <th>Team</th>
+            <th>Matches Played</th>
+            <th>Runs Scored</th>
+            <th>Wickets Taken</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for player in content %}
+        <tr id="player-{{ player.player_id }}">
+            <td>{{ player.player_id }}</td>
+            <td>{{ player.player_name }}</td>
+            <td>{{ player.team }}</td>
+            <td>{{ player.matches_played }}</td>
+            <td>{{ player.runs_scored or 'N/A' }}</td>
+            <td>{{ player.wickets_taken or 'N/A' }}</td>
+            <td>
+                <!-- Add the delete button here -->
+                <button onclick="deletePlayer({{ player.player_id }})" class="contact-btn">Delete</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    function deletePlayer(playerId) {
+    console.log("Delete function triggered for player ID: " + playerId); // Debugging
+
+    if (confirm("Are you sure you want to delete this player?")) {
+        fetch(/delete/${playerId}, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            console.log(Response status: ${response.status}); // Debugging
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error(Failed to delete player: ${response.statusText});
+            }
+        })
+        .then(data => {
+            alert(data.message);
+            if (data.message === 'Player deleted successfully') {
+                // Remove the player's row from the table
+                document.getElementById(player-${playerId}).remove();
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred while deleting the player.");
+        });
+    }
+}
+
+
+</script>
+{% endblock %}

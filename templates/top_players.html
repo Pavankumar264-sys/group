@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Top IPL Players{% endblock %}
+
+{% block content %}
+<h2>Top IPL Players</h2>
+
+<table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Player ID</th>
+            <th>Player Name</th>
+            <th>Team</th>
+            <th>Matches Played</th>
+            <th>Runs Scored</th>
+            <th>Wickets Taken</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if content %}
+            {% for player in content %}
+                <tr>
+                    <td>{{ player.player_id }}</td>
+                    <td>{{ player.player_name }}</td>
+                    <td>{{ player.team }}</td>
+                    <td>{{ player.matches_played }}</td>
+                    <td>{{ player.runs_scored }}</td>
+                    <td>{{ player.wickets_taken }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="6">No players found.</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+<a href="/">Back to Home</a>
+{%endblock%}
